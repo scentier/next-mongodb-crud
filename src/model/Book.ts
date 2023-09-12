@@ -1,4 +1,3 @@
-import { slugify } from "@/lib/funcs";
 import { Schema, model, models } from "mongoose";
 
 const BookSchema = new Schema<TBook>(
@@ -12,11 +11,6 @@ const BookSchema = new Schema<TBook>(
   },
   { timestamps: true }
 );
-
-// BookSchema.pre("save", function (this: TBook, next) {
-//   this.slug = slugify(this.title);
-//   next();
-// });
 
 // cek apakah sudah punya model book, jika belum buat model
 const Book = models.Book || model("Book", BookSchema);
