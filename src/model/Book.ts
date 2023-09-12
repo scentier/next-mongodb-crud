@@ -13,10 +13,10 @@ const BookSchema = new Schema<TBook>(
   { timestamps: true }
 );
 
-BookSchema.pre("save", function (this: TBook, next) {
-  this.slug = slugify(this.title);
-  next();
-});
+// BookSchema.pre("save", function (this: TBook, next) {
+//   this.slug = slugify(this.title);
+//   next();
+// });
 
 // cek apakah sudah punya model book, jika belum buat model
 const Book = models.Book || model("Book", BookSchema);
