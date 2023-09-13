@@ -30,7 +30,6 @@ export async function PUT(req: NextRequest, { params: { bookId } }: Props) {
 }
 
 export async function GET(req: NextRequest, { params: { bookId } }: Props) {
-  console.log("bookId: ", bookId);
   const getBook = await Book.findOne({ _id: bookId });
-  return NextResponse.json({ getBook }, { status: 200 });
+  return NextResponse.json(getBook);
 }

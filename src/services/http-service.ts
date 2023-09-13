@@ -9,7 +9,6 @@ class HttpService {
   }
 
   async getData<T>() {
-    console.log(this.endpoint);
     const res = await fetch(this.endpoint, {
       cache: "no-store",
     });

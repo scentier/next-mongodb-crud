@@ -1,15 +1,15 @@
+import Link from "next/link";
+
 type Props = {
   books: TBookObj[];
 };
 export default function FreshBooks({ books }: Props) {
-  // console.log(books);
   return (
     <>
       <div>
         {books.map((book) => (
           <div key={book._id}>
-            <div>{book._id}</div>
-            <div>{book.title}</div>
+            <Link href={book._id}>{book.title}</Link>
             <div>{book.description}</div>
             <div>{book.slug}</div>
             <div>{book.author}</div>
@@ -20,7 +20,7 @@ export default function FreshBooks({ books }: Props) {
               <div>
                 tags:
                 {book.tags.map((tag) => (
-                  <span>{tag}, </span>
+                  <span key={tag}>{tag}, </span>
                 ))}
               </div>
             )}
