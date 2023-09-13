@@ -3,10 +3,11 @@ import { Schema, model, models } from "mongoose";
 const BookSchema = new Schema<TBook>(
   {
     title: String,
-    slug: { type: String, unique: true },
+    slug: String,
     description: String,
     author: String,
-    download: String,
+    tags: [String],
+    url: String,
     published: Number,
   },
   { timestamps: true }
