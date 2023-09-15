@@ -1,6 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { TSignUpSchema, signUpSchema } from "@/lib/types";
 
 export default function NewBook() {
@@ -9,14 +9,48 @@ export default function NewBook() {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
+    setError,
   } = useForm<TSignUpSchema>({
     // @ts-ignore
     resolver: zodResolver(signUpSchema),
   });
 
-  const onSubmit = async (data: FieldValues) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    reset();
+  const onSubmit = async (data: TSignUpSchema) => {
+    const res = await fetch("/api/sign-up", {
+      method: "POST",
+      body: JSON.stringify({
+        ...data,
+        confirmPassword: "test server revalidate",
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const result = await res.json();
+    if (!res.ok) {
+      alert("Submitting form failed!");
+      return;
+    }
+
+    if (result.errors) {
+      const err = result.errors;
+      if (err.email) {
+        setError("email", { type: "server", message: err.email });
+      }
+      if (err.password) {
+        setError("password", { type: "server", message: err.password });
+      }
+      if (err.confirmPassword) {
+        setError("confirmPassword", {
+          type: "server",
+          message: err.confirmPassword,
+        });
+      }
+    }
+
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    // reset();
   };
   return (
     <form

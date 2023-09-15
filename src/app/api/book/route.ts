@@ -21,7 +21,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
       return NextResponse.json({ message: "exist!", data: bookObj });
     }
   } catch (error) {
-    // catch (e: unkown)
     const e = error as Record<string, unknown>;
     return NextResponse.json({ message: e.message, data: bookObj });
   }

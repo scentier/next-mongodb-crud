@@ -16,11 +16,10 @@ export function middleware(request: Request) {
     "Content-Type, Authorization"
   );
   response.headers.set("Access-Control-Max-Age", "86400");
-  //   response.headers.set("Access-Control-Allow-Origin", "*");
 
   console.log("Middleware!");
-  console.log(request.method);
-  console.log(request.url);
+  console.log("request.method: ", request.method);
+  console.log("request.url: ", request.url);
 
   return response;
 }
