@@ -1,13 +1,21 @@
-type TBookStr = Record<
-  "title" | "description" | "slug" | "author" | "download" | "url",
-  string
->;
+// type TBookStr = Record<
+//   "title" | "description" | "slug" | "author" | "download" | "url",
+//   string
+// >;
 
-type TTags = {
-  tags: string[];
+type TBookStr = {
+  title: string;
+  description: string;
+  slug?: string;
+  author?: string;
+  url?: string;
 };
 
-type TbookNum = { published: number };
+type TTags = {
+  tags?: string[];
+};
+
+type TbookNum = { published?: number };
 
 type TBook = TBookStr & TbookNum & TTags;
 

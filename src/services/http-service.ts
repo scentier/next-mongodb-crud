@@ -19,6 +19,21 @@ class HttpService {
 
     return data;
   }
+
+  async postData<T>(entity: T) {
+    const res = await fetch(this.endpoint, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(entity),
+    });
+
+    if (!res.ok) throw new Error("failed to post");
+
+    const data = await res.json();
+    return data;
+  }
 }
 
 export default (arg: string) => new HttpService(arg);
