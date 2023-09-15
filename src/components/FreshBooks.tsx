@@ -10,20 +10,26 @@ export default function FreshBooks({ books }: Props) {
         {books.map((book) => (
           <div key={book._id}>
             <Link href={book._id}>{book.title}</Link>
-            <div>{book.description}</div>
-            <div>{book.slug}</div>
-            <div>{book.author}</div>
-            <div>{book.published}</div>
+            {book.description && (
+              <div>deskrpsi ======== {book.description}</div>
+            )}
+            {typeof book.slug != "undefined" && (
+              <div>slug ========== {book.slug}</div>
+            )}
+            {!!book.author && <div>author =============== {book.author}</div>}
+            {book.published && (
+              <div>published ============= {book.published}</div>
+            )}
             <div>{book.createdAt}</div>
             <div>{book.updatedAt}</div>
-            {book.tags.length > 0 && (
+            {typeof book.tags != "undefined" && book.tags.length > 0 ? (
               <div>
                 tags:
                 {book.tags.map((tag) => (
                   <span key={tag}>{tag}, </span>
                 ))}
               </div>
-            )}
+            ) : null}
             <hr />
           </div>
         ))}
