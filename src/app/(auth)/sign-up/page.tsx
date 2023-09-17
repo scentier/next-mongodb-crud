@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { TSignUpSchema, signUpSchema } from "@/lib/types";
 
-export default function NewBook() {
+export default function SignUp() {
   const {
     register,
     handleSubmit,
