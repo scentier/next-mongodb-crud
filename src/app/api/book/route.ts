@@ -1,11 +1,36 @@
 import connectDb from "@/lib/connect-db";
 import { slugify } from "@/lib/functions";
+import { newBookSchema } from "@/lib/types";
 import Book from "@/model/Book";
 import { NextRequest, NextResponse } from "next/server";
 
 connectDb();
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(request: Request) {
+  const body: unknown = await request.json();
+  const result = newBookSchema.safeParse(body);
+
+  let zodErrors = {};
+  if (!result.success) {
+    result.error.issues.forEach((issue) => {
+      zodErrors = { ...zodErrors, [issue.path[0]]: issue.message };
+    });
+  } else {
+    // to access result.data must be within result.success block
+    const bookObj: TBook = result.data;
+    const slug = slugify(bookObj.title);
+    bookObj.slug = slug;
+    console.log("route.ts>bookObj====", bookObj);
+  }
+
+  return NextResponse.json(
+    Object.keys(zodErrors).length > 0
+      ? { errors: zodErrors }
+      : { success: true }
+  );
+}
+
+export async function post_mongo(req: NextRequest, res: NextResponse) {
   const bookObj: TBook = await req.json();
   const slug = slugify(bookObj.title);
   bookObj.slug = slug;
