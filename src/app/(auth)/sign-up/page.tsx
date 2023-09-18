@@ -2,6 +2,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { TSignUpSchema, signUpSchema } from "@/lib/types";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sign-up",
+  description: "Free sign-up",
+};
 
 export default function SignUp() {
   const {

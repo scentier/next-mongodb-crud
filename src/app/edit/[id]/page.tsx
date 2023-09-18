@@ -1,9 +1,15 @@
 "use client";
+import { Metadata } from "next";
 // import httpService from "@/services/http-service";
 import { useForm } from "react-hook-form";
 
 type Props = {
   params: { id: string };
+};
+
+export const metadata: Metadata = {
+  title: "Edit Book",
+  description: "Correct if something to be fix",
 };
 
 export default function EditPage({ params: { id } }: Props) {
