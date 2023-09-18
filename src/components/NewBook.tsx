@@ -1,9 +1,12 @@
 "use client";
 import { TNewbookSchema, newBookSchema } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 export default function NewBook() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -28,7 +31,7 @@ export default function NewBook() {
     }
 
     if (resData.success) {
-      alert(resData.message.message);
+      router.push("/fresh");
     }
 
     console.log("resData.message", resData.message);
@@ -47,8 +50,8 @@ export default function NewBook() {
       if (err.published) {
         setError("published", { type: "server", message: err.published });
       }
-      if (err.link) {
-        setError("link", { type: "server", message: err.link });
+      if (err.url) {
+        setError("url", { type: "server", message: err.url });
       }
     }
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -58,69 +61,69 @@ export default function NewBook() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 mt-2">
       <div className="flex flex-col">
-        <label className="text-indigo-500 mb-1">Title</label>
+        <label className="text-blue-500 mb-1">Title</label>
         {errors.title && <p className="text-red-400">{errors.title.message}</p>}
         <input
           {...register("title")}
-          className="border border-indigo-500 rounded h-10 px-4 py-2"
+          className="border border-blue-500 rounded h-10 px-4 py-2"
           name="title"
           type="text"
           placeholder="Book Title"
         />
       </div>
       <div className="flex flex-col">
-        <label className="text-indigo-500 mb-1">Description</label>
+        <label className="text-blue-500 mb-1">Description</label>
         {errors.description && (
           <p className="text-red-400">{errors.title?.message}</p>
         )}
         <textarea
           {...register("description")}
-          className="h-full min-h-[100px] resize-none rounded-md border border-indigo-500 px-4 py-2"
+          className="h-full min-h-[100px] resize-none rounded-md border border-blue-500 px-4 py-2"
           name="description"
           placeholder="Book Description"
         ></textarea>
       </div>
       <div className="flex flex-col">
-        <label className="text-indigo-500 mb-1">Author</label>
+        <label className="text-blue-500 mb-1">Author</label>
         {errors.author && (
           <p className="text-red-400">{errors.author.message}</p>
         )}
         <input
           {...register("author")}
-          className="px-4 py-2 rounded border border-indigo-500"
+          className="px-4 py-2 rounded border border-blue-500"
           name="author"
           type="text"
           placeholder="Book Author"
         />
       </div>
       <div className="flex flex-col">
-        <label className="text-indigo-500 mb-1">Published</label>
+        <label className="text-blue-500 mb-1">Published</label>
         {errors.published && (
           <p className="text-red-400">{errors.published.message}</p>
         )}
         <input
           {...register("published", { valueAsNumber: true })}
-          className="px-4 py-2 rounded border border-indigo-500"
+          className="px-4 py-2 rounded border border-blue-500"
           name="published"
           type="number"
           placeholder="Book's Year Published"
         />
       </div>
       <div className="flex flex-col">
-        <label className="text-indigo-500 mb-1">Link</label>
-        {errors.link && <p className="text-red-400">{errors.link.message}</p>}
+        <label className="text-blue-500 mb-1">URL</label>
+        {errors.url && <p className="text-red-400">{errors.url.message}</p>}
         <input
-          {...register("link")}
-          className="px-4 py-2 rounded border border-indigo-500"
-          name="link"
+          {...register("url")}
+          className="px-4 py-2 rounded border border-blue-500"
+          name="url"
           type="text"
-          placeholder="Book Link"
+          placeholder="Book URL"
         />
       </div>
       <button
         type="submit"
         disabled={isSubmitting}
-        className="bg-indigo-500 disabled:bg-gray-500 text-gray-100 px-4 py-2 rounded"
+        className="bg-blue-500 disabled:bg-gray-500 text-gray-100 px-4 py-2 rounded"
       >
         Submit
       </button>

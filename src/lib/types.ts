@@ -21,7 +21,7 @@ export const newBookSchema = z.object({
     .number({ invalid_type_error: "invalid_type_error: Year must be numbers." })
     .min(687, "Year published must be at least 687")
     .positive(),
-  link: z.string().min(3, "Link must be at least 3 characters"),
+  url: z.string().min(3, "Link must be at least 3 characters"),
 });
 
 export type TNewbookSchema = z.infer<typeof newBookSchema>;
