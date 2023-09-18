@@ -1,4 +1,5 @@
 import connectDb from "@/lib/connect-db";
+import { TNewbookSchema, newBookSchema } from "@/lib/types";
 import Book from "@/model/Book";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -9,15 +10,30 @@ type Props = {
 };
 
 export async function PUT(request: Request, { params: { bookId } }: Props) {
+  let zodErrors = {};
+  let statusMsg = {};
   try {
-    const body = await request.json();
-    console.log("body=======================", body);
-    await Book.findByIdAndUpdate(bookId, body);
-    return NextResponse.json({ message: "update ok!" }, { status: 200 });
+    const body: unknown = await request.json();
+    const result = newBookSchema.safeParse(body);
+    if (!result.success) {
+      result.error.issues.forEach((issue) => {
+        zodErrors = { ...zodErrors, [issue.path[0]]: issue.message };
+      });
+    } else {
+      const updatedBook = result.data;
+      await Book.findByIdAndUpdate(bookId, updatedBook);
+      statusMsg = { ...statusMsg, message: "Book Updated!" };
+    }
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({ message: "catch error" }, { status: 400 });
+    const err = error as Record<string, unknown>;
+    statusMsg = { ...statusMsg, message: err.message };
   }
+
+  return NextResponse.json(
+    Object.keys(zodErrors).length > 0
+      ? { errors: zodErrors }
+      : { success: true, status: statusMsg }
+  );
 }
 
 // export async function PUT(req: NextRequest, { params: { bookId } }: Props) {
