@@ -30,6 +30,7 @@ export default function FreshBooks({ books }: Props) {
                 ))}
               </div>
             ) : null}
+            {book.url && <p>Link: {book.url}</p>}
             <hr />
           </div>
         ))}

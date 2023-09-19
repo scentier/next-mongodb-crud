@@ -17,6 +17,7 @@ export default function BookDetail({ book }: Props) {
         </p>
       ) : null}
       <p>First published: {book.published}</p>
+      {book.url && <p>Link: {book.url}</p>}
     </article>
   );
 }
