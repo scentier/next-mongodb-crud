@@ -1,9 +1,8 @@
 "use client";
-import { TNewbookSchema, newBookSchema } from "@/lib/types";
+import { TZodBookSchema, zodBookSchema } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Metadata } from "next";
 import { useRouter } from "next/navigation";
-// import httpService from "@/services/http-service";
 import { useForm } from "react-hook-form";
 
 type Props = {
@@ -18,7 +17,7 @@ export const metadata: Metadata = {
 export default function EditPage({ params: { id } }: Props) {
   const router = useRouter();
 
-  const getBook = async (): Promise<TNewbookSchema> => {
+  const getBook = async (): Promise<TZodBookSchema> => {
     const res = await fetch(`/api/book/${id}`, { cache: "no-store" });
     if (!res.ok) throw new Error("failed to fetch");
     return await res.json();
@@ -28,12 +27,12 @@ export default function EditPage({ params: { id } }: Props) {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<TNewbookSchema>({
+  } = useForm<TZodBookSchema>({
     defaultValues: getBook,
-    resolver: zodResolver(newBookSchema),
+    resolver: zodResolver(zodBookSchema),
   });
 
-  const onSubmit = async (data: TNewbookSchema) => {
+  const onSubmit = async (data: TZodBookSchema) => {
     const res = await fetch(`/api/book/${id}`, {
       method: "PUT",
       body: JSON.stringify(data),

@@ -1,5 +1,5 @@
 import connectDb from "@/lib/connect-db";
-import { TNewbookSchema, newBookSchema } from "@/lib/types";
+import { zodBookSchema } from "@/lib/types";
 import Book from "@/model/Book";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -14,7 +14,7 @@ export async function PUT(request: Request, { params: { bookId } }: Props) {
   let statusMsg = {};
   try {
     const body: unknown = await request.json();
-    const result = newBookSchema.safeParse(body);
+    const result = zodBookSchema.safeParse(body);
     if (!result.success) {
       result.error.issues.forEach((issue) => {
         zodErrors = { ...zodErrors, [issue.path[0]]: issue.message };

@@ -1,6 +1,6 @@
 import connectDb from "@/lib/connect-db";
 import { slugify } from "@/lib/functions";
-import { newBookSchema } from "@/lib/types";
+import { zodBookSchema } from "@/lib/types";
 import Book from "@/model/Book";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -8,7 +8,7 @@ connectDb();
 
 export async function POST(request: Request) {
   const body: unknown = await request.json();
-  const result = newBookSchema.safeParse(body);
+  const result = zodBookSchema.safeParse(body);
 
   let zodErrors = {};
   let statusMsg = {};

@@ -1,5 +1,5 @@
 "use client";
-import { TNewbookSchema, newBookSchema } from "@/lib/types";
+import { TZodBookSchema, zodBookSchema } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -13,9 +13,9 @@ export default function NewBook() {
     formState: { errors, isSubmitting },
     reset,
     setError,
-  } = useForm<TNewbookSchema>({ resolver: zodResolver(newBookSchema) });
+  } = useForm<TZodBookSchema>({ resolver: zodResolver(zodBookSchema) });
 
-  const onSubmit = async (data: TNewbookSchema) => {
+  const onSubmit = async (data: TZodBookSchema) => {
     const res = await fetch("/api/book", {
       method: "POST",
       body: JSON.stringify(data),

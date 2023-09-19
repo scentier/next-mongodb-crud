@@ -1,6 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
-const BookSchema = new Schema<TBook>(
+const schema = new Schema<TBook>(
   {
     title: String,
     slug: String,
@@ -14,6 +14,6 @@ const BookSchema = new Schema<TBook>(
 );
 
 // cek apakah sudah punya model book, jika belum buat model
-const Book = models.Book || model("Book", BookSchema);
+const Book = models.Book || model("Book", schema);
 
 export default Book;
