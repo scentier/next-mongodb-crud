@@ -29,8 +29,10 @@ class HttpService {
       body: JSON.stringify(entity),
     });
 
-    if (!res.ok) throw new Error("failed to post");
-
+    if (!res.ok) {
+      throw new Error("failed to post");
+      console.log(this.endpoint);
+    }
     const data = await res.json();
     return data;
   }

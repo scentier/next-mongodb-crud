@@ -9,13 +9,17 @@ type Props = {
 export default function BookDetail({ book }: Props) {
   return (
     <article>
-      <header>
-        <aside>
-          <Link href="/">{siteName}</Link>
-          {" > "}
-          <Link href="/fresh">Books</Link>
-          {" > "}
-          {book.title}
+      <header className="pt-4">
+        <aside className="mb-3">
+          <Link className="font-bold text-sm" href="/">
+            {siteName}
+          </Link>
+          <span className="mx-1">{" > "}</span>
+          <Link className="font-bold text-xs" href="/fresh">
+            Books
+          </Link>
+          <span className="mx-1">{" > "}</span>
+          <span className="text-xs text-neutral-600">{book.title}</span>
         </aside>
         <h1>{book.title}</h1>
         <div>

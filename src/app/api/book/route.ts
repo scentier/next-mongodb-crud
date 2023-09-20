@@ -4,9 +4,10 @@ import { TBookModel, zodBookSchema } from "@/lib/types";
 import Book from "@/model/Book";
 import { NextRequest, NextResponse } from "next/server";
 
-connectDb();
+// connectDb();
 
 export async function POST(request: Request) {
+  await connectDb();
   // unknown: don't trust anything caming from client
   const body: unknown = await request.json();
   const result = zodBookSchema.safeParse(body);
@@ -46,11 +47,13 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
+  await connectDb();
   const getBooks = await Book.find().sort({ $natural: -1 }).limit(10);
   return NextResponse.json(getBooks);
 }
 
 export async function DELETE(req: NextRequest) {
+  await connectDb();
   const bookId = req.nextUrl.searchParams.get("deleteId");
   await Book.findByIdAndDelete(bookId);
   return NextResponse.json({ message: "Book Deleted!" }, { status: 200 });
