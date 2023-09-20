@@ -1,12 +1,13 @@
 import connectDb from "@/lib/connect-db";
 import { slugify } from "@/lib/functions";
-import { zodBookSchema } from "@/lib/types";
+import { TBookModel, zodBookSchema } from "@/lib/types";
 import Book from "@/model/Book";
 import { NextRequest, NextResponse } from "next/server";
 
 connectDb();
 
 export async function POST(request: Request) {
+  // unknown: don't trust anything caming from client
   const body: unknown = await request.json();
   const result = zodBookSchema.safeParse(body);
 
@@ -18,7 +19,8 @@ export async function POST(request: Request) {
     });
   } else {
     // to access result.data must be within result.success block
-    const bookObj: TBook = result.data;
+    // use type TBookModel to add slug property
+    const bookObj: TBookModel = result.data;
     const slug = slugify(bookObj.title);
     bookObj.slug = slug;
     try {
@@ -44,7 +46,7 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-  const getBooks = await Book.find();
+  const getBooks = await Book.find().sort({ $natural: -1 }).limit(10);
   return NextResponse.json(getBooks);
 }
 
