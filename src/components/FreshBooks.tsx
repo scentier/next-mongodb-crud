@@ -1,3 +1,4 @@
+import { TBookObj } from "@/lib/types";
 import Link from "next/link";
 
 type Props = {

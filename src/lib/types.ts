@@ -25,3 +25,24 @@ export const zodBookSchema = z.object({
 });
 
 export type TZodBookSchema = z.infer<typeof zodBookSchema>;
+
+type TBookStr = Record<"title" | "description" | "author" | "url", string>;
+
+type TBookYearPub = {
+  published: number;
+};
+
+type TOps = {
+  slug?: string;
+  tags?: string[];
+};
+
+export type TBookModel = TBookStr & TBookYearPub & TOps;
+
+type TMongoObj = {
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type TBookObj = TMongoObj & TBookModel;

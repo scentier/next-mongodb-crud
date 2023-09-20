@@ -1,4 +1,5 @@
 import BookDetail from "@/components/BookDetail";
+import { TBookObj } from "@/lib/types";
 import httpService from "@/services/http-service";
 import { Metadata } from "next";
 

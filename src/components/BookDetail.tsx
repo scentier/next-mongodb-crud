@@ -1,3 +1,5 @@
+import { TBookObj } from "@/lib/types";
+
 type Props = {
   book: TBookObj;
 };

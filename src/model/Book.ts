@@ -1,6 +1,7 @@
+import { TBookModel } from "@/lib/types";
 import { Schema, model, models } from "mongoose";
 
-const schema = new Schema<TBook>(
+const schema = new Schema<TBookModel>(
   {
     title: String,
     slug: String,
