@@ -1,4 +1,6 @@
 import { TBookObj } from "@/lib/types";
+import { siteName } from "@/lib/variables";
+import Link from "next/link";
 
 type Props = {
   book: TBookObj;
@@ -7,8 +9,19 @@ type Props = {
 export default function BookDetail({ book }: Props) {
   return (
     <article>
-      <h1>{book.title}</h1>
-      <h3>{book.author}</h3>
+      <header>
+        <aside>
+          <Link href="/">{siteName}</Link>
+          {" > "}
+          <Link href="/fresh">Books</Link>
+          {" > "}
+          {book.title}
+        </aside>
+        <h1>{book.title}</h1>
+        <div>
+          {book.author}, {book.published}
+        </div>
+      </header>
       <div className="content">{book.description}</div>
       {typeof book.tags != "undefined" && book.tags.length > 0 ? (
         <p>
@@ -18,7 +31,6 @@ export default function BookDetail({ book }: Props) {
           ))}
         </p>
       ) : null}
-      <p>First published: {book.published}</p>
       {book.url && <p>Link: {book.url}</p>}
     </article>
   );
