@@ -1,6 +1,6 @@
 import FreshBooks from "@/components/FreshBooks";
 import { TBookObj } from "@/lib/types";
-import httpService from "@/services/http-service";
+import httpService from "@/lib/http-service";
 import { Metadata } from "next";
 
 const pageTitle = "Get Your Fresh & Latest Book Here";

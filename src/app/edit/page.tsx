@@ -1,6 +1,6 @@
 import EditAllBooks from "@/components/EditAllBooks";
 import { TBookObj } from "@/lib/types";
-import httpService from "@/services/http-service";
+import httpService from "@/lib/http-service";
 import { Metadata } from "next";
 
 const pageTitle = "Edit All Books";

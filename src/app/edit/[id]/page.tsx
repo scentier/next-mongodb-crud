@@ -1,4 +1,4 @@
-import httpService from "@/services/http-service";
+import httpService from "@/lib/http-service";
 import { Metadata } from "next";
 import { TZodBookSchema, zodBookSchema } from "@/lib/types";
 import EditBook from "@/components/EditBook";

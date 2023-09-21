@@ -1,6 +1,6 @@
 import FreshBooks from "@/components/FreshBooks";
 import { TBookObj } from "@/lib/types";
-import httpService from "@/services/http-service";
+import httpService from "@/lib/http-service";
 
 export default async function Home() {
   const books = await httpService("/book").getData<TBookObj[]>();

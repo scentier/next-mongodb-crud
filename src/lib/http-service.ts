@@ -22,7 +22,7 @@ class HttpService {
     return data;
   }
 
-  async postData<T>(entity: T) {
+  async createData<T>(entity: T) {
     const res = await fetch(this.endpoint, {
       method: "POST",
       headers: {
@@ -33,8 +33,32 @@ class HttpService {
 
     if (!res.ok) {
       throw new Error("failed to post");
-      console.log(this.endpoint);
     }
+    const data = await res.json();
+    return data;
+  }
+
+  async deleteData<T>(id: T) {
+    const res = await fetch(`${this.endpoint}?deleteId=${id}`, {
+      method: "DELETE",
+    });
+    return res;
+  }
+
+  async updateData<T>(entity: T, id: T) {
+    const res = await fetch(`${this.endpoint}/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(entity),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!res.ok) {
+      alert("PUT Fetch Failed");
+      return;
+    }
+
     const data = await res.json();
     return data;
   }
