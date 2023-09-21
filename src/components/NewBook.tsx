@@ -4,7 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
-export default function NewBook() {
+type Props = {
+  pageTitle: string;
+};
+
+export default function NewBook({ pageTitle }: Props) {
   const router = useRouter();
 
   const {
@@ -59,74 +63,84 @@ export default function NewBook() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 mt-2">
-      <div className="flex flex-col">
-        <label className="text-blue-500 mb-1">Title</label>
-        {errors.title && <p className="text-red-400">{errors.title.message}</p>}
-        <input
-          {...register("title")}
-          className="border border-blue-500 rounded h-10 px-4 py-2"
-          name="title"
-          type="text"
-          placeholder="Book Title"
-        />
-      </div>
-      <div className="flex flex-col">
-        <label className="text-blue-500 mb-1">Description</label>
-        {errors.description && (
-          <p className="text-red-400">{errors.title?.message}</p>
-        )}
-        <textarea
-          {...register("description")}
-          className="h-full min-h-[100px] resize-none rounded-md border border-blue-500 px-4 py-2"
-          name="description"
-          placeholder="Book Description"
-        ></textarea>
-      </div>
-      <div className="flex flex-col">
-        <label className="text-blue-500 mb-1">Author</label>
-        {errors.author && (
-          <p className="text-red-400">{errors.author.message}</p>
-        )}
-        <input
-          {...register("author")}
-          className="px-4 py-2 rounded border border-blue-500"
-          name="author"
-          type="text"
-          placeholder="Book Author"
-        />
-      </div>
-      <div className="flex flex-col">
-        <label className="text-blue-500 mb-1">Published</label>
-        {errors.published && (
-          <p className="text-red-400">{errors.published.message}</p>
-        )}
-        <input
-          {...register("published", { valueAsNumber: true })}
-          className="px-4 py-2 rounded border border-blue-500"
-          name="published"
-          type="number"
-          placeholder="Book's Year Published"
-        />
-      </div>
-      <div className="flex flex-col">
-        <label className="text-blue-500 mb-1">URL</label>
-        {errors.url && <p className="text-red-400">{errors.url.message}</p>}
-        <input
-          {...register("url")}
-          className="px-4 py-2 rounded border border-blue-500"
-          name="url"
-          type="text"
-          placeholder="Book URL"
-        />
-      </div>
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="bg-blue-500 disabled:bg-gray-500 text-gray-100 px-4 py-2 rounded"
+    <>
+      <h1 className="my-10 text-blue-300 text-4xl font-light drop-shadow-lg py-5 border-b-[1px] border-blue-500">
+        {pageTitle}
+      </h1>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-3 mt-10 w-full lg:w-3/5"
       >
-        Submit
-      </button>
-    </form>
+        <div className="flex flex-col">
+          <label className="text-blue-500 mb-1">Title</label>
+          {errors.title && (
+            <p className="text-red-400">{errors.title.message}</p>
+          )}
+          <input
+            {...register("title")}
+            className="border border-blue-500 rounded h-10 px-4 py-2"
+            name="title"
+            type="text"
+            placeholder="Book Title"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="text-blue-500 mb-1">Description</label>
+          {errors.description && (
+            <p className="text-red-400">{errors.title?.message}</p>
+          )}
+          <textarea
+            {...register("description")}
+            className="h-full min-h-[100px] resize-none rounded-md border border-blue-500 px-4 py-2"
+            name="description"
+            placeholder="Book Description"
+          ></textarea>
+        </div>
+        <div className="flex flex-col">
+          <label className="text-blue-500 mb-1">Author</label>
+          {errors.author && (
+            <p className="text-red-400">{errors.author.message}</p>
+          )}
+          <input
+            {...register("author")}
+            className="px-4 py-2 rounded border border-blue-500"
+            name="author"
+            type="text"
+            placeholder="Book Author"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="text-blue-500 mb-1">Published</label>
+          {errors.published && (
+            <p className="text-red-400">{errors.published.message}</p>
+          )}
+          <input
+            {...register("published", { valueAsNumber: true })}
+            className="px-4 py-2 rounded border border-blue-500"
+            name="published"
+            type="number"
+            placeholder="Book's Year Published"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="text-blue-500 mb-1">URL</label>
+          {errors.url && <p className="text-red-400">{errors.url.message}</p>}
+          <input
+            {...register("url")}
+            className="px-4 py-2 rounded border border-blue-500"
+            name="url"
+            type="text"
+            placeholder="Book URL"
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="bg-blue-500 disabled:bg-gray-500 text-gray-100 px-4 py-2 rounded"
+        >
+          Submit
+        </button>
+      </form>
+    </>
   );
 }

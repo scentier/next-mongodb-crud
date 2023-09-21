@@ -1,11 +1,13 @@
 import NewBook from "@/components/NewBook";
 import { Metadata } from "next";
 
+const pageTitle = "Add New Book";
+
 export const metadata: Metadata = {
-  title: "Add New Book",
+  title: pageTitle,
   description: "Don't be shy. Add new book here",
 };
 
 export default function NewPage() {
-  return <NewBook />;
+  return <NewBook pageTitle={pageTitle} />;
 }

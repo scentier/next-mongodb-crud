@@ -13,6 +13,8 @@ class HttpService {
       cache: "no-store",
     });
 
+    // const res = await fetch(this.endpoint);
+
     if (!res.ok) throw new Error("failed to fetch");
 
     const data = await res.json();

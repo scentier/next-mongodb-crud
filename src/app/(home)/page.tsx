@@ -6,8 +6,8 @@ export default async function Home() {
   const books = await httpService("/book").getData<TBookObj[]>();
   const pageTitle = "Huge Library for You";
   return (
-    <main>
+    <>
       <FreshBooks books={books} pageTitle={pageTitle} />
-    </main>
+    </>
   );
 }
