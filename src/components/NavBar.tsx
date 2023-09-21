@@ -19,6 +19,12 @@ export default function NavBar() {
             </Link>
             <Link
               className="font-light underline underline-offset-4"
+              href="/edit"
+            >
+              Edit Book
+            </Link>
+            <Link
+              className="font-light underline underline-offset-4"
               href="/new"
             >
               Add Book
