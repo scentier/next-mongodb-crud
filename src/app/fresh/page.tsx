@@ -10,5 +10,6 @@ export const metadata: Metadata = {
 
 export default async function Fresh() {
   const books = await httpService("/book").getData<TBookObj[]>();
-  return <FreshBooks books={books} />;
+  const pageTitle = "Get Your Fresh & Latest Book Here";
+  return <FreshBooks books={books} pageTitle={pageTitle} />;
 }
