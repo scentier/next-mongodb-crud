@@ -1,17 +1,17 @@
-# MongoDB Next.js CRUD
+# Book Library - MongoDB Next.js CRUD
 
-model relationship
+### Home Page
 
-- a book can has many grenres, tags, authors
-- an author can has many books
-- a tag can has many books
-- a genre can has many books
+![home page](./public/readme-img/homepage.png)
 
-```js
-// example book document
-{
-    author: [one or many authors],
-    tags: [one or many tags],
-    genres: [one or many genres],
-}
-```
+### Detail Page
+
+![home page](./public/readme-img/detailbook.png)
+
+### Add Book
+
+![home page](./public/readme-img/addbook.png)
+
+### Edit Book
+
+![home page](./public/readme-img/editbook.png)
